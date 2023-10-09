@@ -1,11 +1,11 @@
 const express = require("express");
+
 const handlebarsConfig = require("./config/handlebarsConfig");
 const expressConfig = require("./config/expressConfig");
 const dbConnect = require("./config/dbConfig");
 
 const { PORT } = require("./constants");
 const routes = require("./router");
-const { db } = require("./models/Cube");
 
 const app = express();
 
