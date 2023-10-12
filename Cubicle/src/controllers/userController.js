@@ -24,10 +24,15 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const token = await userService.login(username, password);
 
-  res.cookie("auth", token, { httpOnly: true });
-  res.redirect("/");
+  try {
+    const token = await userService.login(username, password);
+    res.cookie("auth", token, { httpOnly: true });
+    res.redirect("/");
+  } catch (err) {
+    const errorMessages = extractErrorMsgs(err);
+    res.status(404).render("user/login", { errorMessages });
+  }
 });
 
 router.get("/logout", (req, res) => {
