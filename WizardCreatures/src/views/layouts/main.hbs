@@ -19,6 +19,12 @@
             <p>Error</p>
         </div>-->
 
+      {{#each errorMessages}}
+        <div class="error-container">
+          <p>{{this}}</p>
+        </div>
+      {{/each}}
+
       <nav>
         <!-- Do not forget to change the path to the image -->
         <img src="/img/logo.png" alt="logo" />
