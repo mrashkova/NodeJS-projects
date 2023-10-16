@@ -4,8 +4,8 @@ const animalController = require("./controllers/animalController");
 const userController = require("./controllers/userController");
 
 router.use(homeController);
-router.use("/animals", animalController);
 router.use("/users", userController);
+// router.use("/animals", animalController);
 
 router.get("*", (req, res) => {
   res.redirect("/404");

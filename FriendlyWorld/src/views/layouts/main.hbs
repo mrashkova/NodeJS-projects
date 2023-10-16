@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/static/styles/styles.css" />
+    <link rel="stylesheet" href="/styles/styles.css" />
     <title>Friendly World</title>
   </head>
 
   <body>
-    {{! 
-    <div>
-      <div class="errorContainer">
-        <p>Error</p>
+    {{#each errorMessages}}
+      <div>
+        <div class="errorContainer">
+          <p>{{this}}</p>
+        </div>
       </div>
-    </div> }}
+    {{/each}}
 
     <div id="wrapper">
       <header>
@@ -26,17 +27,19 @@
             <a href="/search">Search</a>
           </div>
 
-          <!-- Logged-in users -->
-          <div class="user">
-            <a href="/animals/create">Add Animal</a>
-            <a href="/users/logout">Logout</a>
-          </div>
-
-          <!-- Guest users -->
-          <div class="guest">
-            <a href="/users/login">Login</a>
-            <a href="/users/register">Register</a>
-          </div>
+          {{#if isAuthenticated}}
+            <!-- Logged-in users -->
+            <div class="user">
+              <a href="/animals/create">Add Animal</a>
+              <a href="/users/logout">Logout</a>
+            </div>
+          {{else}}
+            <!-- Guest users -->
+            <div class="guest">
+              <a href="/users/login">Login</a>
+              <a href="/users/register">Register</a>
+            </div>
+          {{/if}}
         </nav>
       </header>
 

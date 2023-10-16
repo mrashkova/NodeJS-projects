@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const handlebarsConfig = require("./config/handlebarsConfig");
 const expressConfig = require("./config/expressConfig");
@@ -7,7 +8,12 @@ const dbConnect = require("./config/dbConfig");
 const { PORT } = require("./constants");
 const routes = require("./router");
 
+const { auth } = require("./middlewares/authMiddleware");
+
 const app = express();
+
+app.use(cookieParser());
+app.use(auth);
 
 expressConfig(app);
 handlebarsConfig(app);

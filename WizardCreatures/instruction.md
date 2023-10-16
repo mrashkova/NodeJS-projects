@@ -15,7 +15,7 @@
 
 5. Import 'path'
 
-6. Configure routes
+6. Configure routes (router.js)
 
 7. Add images and css in static directory
 
