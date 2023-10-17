@@ -2,9 +2,22 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, requred: true },
-  email: { type: String, requred: true, unique: true },
-  password: { type: String, requred: true },
+  username: {
+    type: String,
+    requred: [true, "Username is required!"],
+    minLength: [5, "The username should be at least five characters long!"],
+  },
+  email: {
+    type: String,
+    requred: [true, "Email is required!"],
+    unique: [true, "Email already exists!"],
+    minLength: [10, "The email should be at least ten character long!"],
+  },
+  password: {
+    type: String,
+    requred: true,
+    minLength: [4, "The password should be at least four characters long!"],
+  },
 });
 
 userSchema.path("email").validate(function (emailInput) {
@@ -14,7 +27,9 @@ userSchema.path("email").validate(function (emailInput) {
 
 userSchema.virtual("repeatPassword").set(function (value) {
   if (value != this.password) {
-    throw new Error("Both passwords must match!");
+    throw new Error(
+      "The password confirmation should be equal to the password!"
+    );
   }
 });
 

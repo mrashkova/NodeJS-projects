@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
+const { extractErrorMsgs } = require("../utils/errorHandler");
 
 router.get("/register", (req, res) => {
   res.render("user/register");
@@ -21,7 +22,9 @@ router.post("/register", async (req, res) => {
     res.cookie("token", token, { httpOnly: true });
     res.redirect("/");
   } catch (error) {
-    res.status(404).render("user/register", error);
+    const errorMessages = extractErrorMsgs(error);
+    console.log(errorMessages);
+    res.status(404).render("user/register", { errorMessages });
   }
 });
 
@@ -38,7 +41,9 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, { httpOnly: true });
     res.redirect("/");
   } catch (error) {
-    res.status(404).render("user/login", error);
+    const errorMessages = extractErrorMsgs(error);
+    console.log(errorMessages);
+    res.status(404).render("user/login", { errorMessages });
   }
 });
 
