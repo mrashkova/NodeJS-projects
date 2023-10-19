@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
   } catch (error) {
     const errorMessages = extractErrorMsgs(error);
     console.log(errorMessages);
-    res.status(404).render("user/register", error);
+    res.status(404).render("user/register", { errorMessages });
   }
 });
 
@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
   } catch (error) {
     const errorMessages = extractErrorMsgs(error);
     console.log(errorMessages);
-    res.status(404).render("user/login", error);
+    res.status(404).render("user/login", { errorMessages });
   }
 });
 

@@ -1,15 +1,10 @@
 const router = require("express").Router();
+const animalService = require("../services/animalService");
 
-router.get("/", (req, res) => {
-  res.render("home");
-});
+router.get("/", async (req, res) => {
+  const animals = await animalService.getAll().lean();
 
-router.get("/dashboard", (req, res) => {
-  res.render("dashboard");
-});
-
-router.get("/search", (req, res) => {
-  res.render("search");
+  res.render("home", { animals });
 });
 
 router.get("/404", (req, res) => {

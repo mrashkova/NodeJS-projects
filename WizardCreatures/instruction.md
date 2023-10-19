@@ -126,31 +126,31 @@
 
 ## TODO
 
-24. Map pages to navigation in both logged in and logged out state
+<!-- 24. Map pages to navigation in both logged in and logged out state
 
 25. Add creature model to mongoose
 
 26. Implement all posts page
 
 - show each creature with image, name, species, description
-- add details btn to every creature
+- add details btn to every creature -->
 
-27. add details page(for creatures)
+<!-- 27. add details page(for creatures)
 
 - If no creatures "There are no posts yet..."
 - all users should be able to see details
 - if the user is the owner of the post should have edit and delete button
 - if the user is not logged in => no buttons
-- if the user is no the owner => vote button
+- if the user is no the owner => vote button -->
 
-28. Vote button
+<!-- 28. Vote button
 
 - when clicked => 'Voted'
 - redirect to the details page for the current creature
 - show the email of the people voted
-- if user has already voted => 'Thanks for Voting.' and add the amil of the voted people
+- if user has already voted => 'Thanks for Voting.' and add the amil of the voted people -->
 
-29. Add creature
+<!-- 29. Add creature
 
 - on success redirect to all posts page
 
@@ -160,7 +160,7 @@
 
 31. Edit creature
 
-- on success redirect to current creature post
+- on success redirect to current creature post -->
 
 32. Routes Guards - check
 

@@ -6,10 +6,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    minLength: [
+      10,
+      "The email is required and should be at least 10 characters long.",
+    ],
   },
   password: {
     type: String,
     required: true,
+    minLength: [
+      4,
+      "The password is required and should be at least 4 characters long.",
+    ],
   },
 });
 
@@ -20,7 +28,9 @@ userSchema.path("email").validate(function (emailInput) {
 
 userSchema.virtual("repeatPassword").set(function (value) {
   if (value != this.password) {
-    throw new Error("Password mismatch!");
+    throw new Error(
+      "The repeat password is required and should be equal to the password."
+    );
   }
 });
 
