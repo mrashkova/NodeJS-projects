@@ -14,7 +14,10 @@ async function validatePassword(password, userPassword) {
 
 // 16. Generate jwt
 async function getToken(user) {
-  const payload = { _id: user._ud, email: user.email };
+  const payload = {
+    _id: user._id,
+    email: user.email,
+  };
   const token = await jwt.sign(payload, SECRET, { expiresIn: "3d" });
 
   return token;

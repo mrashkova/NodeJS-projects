@@ -13,7 +13,7 @@ exports.auth = async (req, res, next) => {
 
       next();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       res.clearCookie("token");
       res.redirect("/users/login");
     }
