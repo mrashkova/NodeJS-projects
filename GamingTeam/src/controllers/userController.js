@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
 const { extractErrorMsgs } = require("../utils/errorHandler");
+const { isAuth } = require("../middleware/authMiddleware");
 
 router.get("/register", (req, res) => {
   res.render("user/register");

@@ -3,12 +3,14 @@
     <main id="create">
         <!-- In case of error, you should display div with class "errorContainer" -->
         <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-
-        <!-- <div>
+       
+        {{#each errorMessages}}
+            <div>
             <div class="errorContainer">
-                <p>Error</p>
+                <p>{{this}}</p>
             </div>
-        </div> -->
+        </div> 
+        {{/each}}
         <section id="create-container">
             <div class="create-container-info">
                 <h1>Create Game Code Offer</h1>

@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const gameService = require("../services/gameService");
 const { extractErrorMsgs } = require("../utils/errorHandler");
+const { isAuth } = require("../middleware/authMiddleware");
 
 router.get("/catalog", async (req, res) => {
   const games = await gameService.getAll().lean();
   res.render("game/catalog", { games });
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", isAuth, (req, res) => {
   res.render("game/create");
 });
 
@@ -28,7 +29,7 @@ router.post("/create", async (req, res) => {
     res.redirect("/games/catalog");
   } catch (error) {
     const errorMessages = extractErrorMsgs(error);
-    // console.log(errorMessages);
+    console.log(errorMessages);
     res.status(404).render("game/create", { errorMessages });
   }
 });
@@ -41,8 +42,9 @@ router.get("/:gameId/details", async (req, res) => {
   const { user } = req;
   const { owner } = game;
   const isOwner = user?._id === owner.toString();
+  const hasBought = game.boughtBy.some((b) => b?.toString() === user?._id);
 
-  res.render("game/details", { game, isOwner });
+  res.render("game/details", { game, isOwner, hasBought });
 });
 
 router.get("/:gameId/edit", async (req, res) => {
@@ -75,6 +77,15 @@ router.get("/:gameId/delete", async (req, res) => {
   await gameService.delete(gameId);
 
   res.redirect("/games/catalog");
+});
+
+router.get("/:gameId/buy", async (req, res) => {
+  const { gameId } = req.params;
+  const { _id } = req.user;
+
+  await gameService.addBoughtBy(gameId, _id);
+
+  res.redirect(`/games/${gameId}/details`);
 });
 
 router.get("/search", (req, res) => {
